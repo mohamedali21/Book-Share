@@ -1,0 +1,67 @@
+.detailsDiv{
+    margin-top: 25px;
+    /* width: 90%; */
+  
+   box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.Description{
+    width:60%;
+    min-height: 200px;
+    padding-bottom:10px; 
+    margin-bottom: 20px;
+    box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.Related-Images{
+    padding-top: 5px;
+    min-height: 260px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(214, 213, 213);
+    border-radius: 2px;
+    background: rgb(235, 235, 235);
+}
+.Related-Images img{
+    margin-bottom:20px;
+    height: 250px;
+}
+@media screen and (min-width: 600px) {
+    .Description {
+        width:100%;
+    }
+    .CarouselDiv{
+        margin-bottom: 20px;
+        height: fit-content;
+    }
+}
+
+
+
+.con
+    {
+        box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: #6c9dc7; 
+    }
+    #text
+    {
+        margin-top: 40px;
+        
+    }
+    @media only screen and (max-width: 700px) {
+#text {
+    margin-top: 20px;
+    
+}
+}
+p{
+    color:white;
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+      
+    }
+}
+
+h4 { 
+    color:#fff !important;
+}

@@ -1,0 +1,152 @@
+
+
+<div class="container">
+  <h1>ADD BOOK</h1>
+  <div [hidden]="submitted">
+  <form #prodFrm="ngForm" (ngSubmit)="onSubmit()">
+ 
+    
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" 
+      [(ngModel)]="book.BookName" required minlength="3" #bookName='ngModel'>
+
+     
+
+      <div *ngIf="bookName.invalid  && !bookName.untouched "  class="alert alert-danger">
+        name should be 3 char at least
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="points">points</label>
+      <input type="number" min="0" max="100" value="0" class="form-control" id="points" name="points" 
+      [(ngModel)]="book.Points" required minlength="3" #bookPoints='ngModel'>
+
+     
+    </div>
+
+    <div class="form-group">
+      <label for="discription">Discription</label>
+      <textarea rows="4" cols="50" class="form-control" id="discription" name="discription" 
+      [(ngModel)]="book.Discription" required minlength="3" #bookDiscription='ngModel'> </textarea>
+
+      
+    </div>
+
+    <div class="form-group">
+      <select  (change)="change($event.target.value)">
+            <option   *ngFor="let c of cat" [value]="c.Name">
+              {{c.Name}}
+            </option>
+          </select>
+        </div>
+
+       
+  
+        <div class="form-group">
+      <select   (change)="change1($event.target.value)">
+            <option *ngFor="let c of subCat?.SubCategoryName" [value]="c">
+              {{c}}
+            </option>
+          </select>
+        </div>
+        
+  
+        <agm-map  [zoom]="zoom" [latitude]="latitude1" [longitude]="longitude1"  (mapClick)="click($event)">
+            <agm-marker [latitude]="latitude1 " [longitude]="longitude1"></agm-marker>
+            
+        </agm-map>
+
+      
+        <div class="form-group"> <button type="button"  class="btn btn-default" (click)="subscribeCurrentPosition1()"  >GET MY LOCATION</button></div>
+        <label for="name">Governate</label>
+        <input type="text" class="form-control" id="Governate" name="Governate" required  readonly
+        [(ngModel)]="book.Governate" >
+
+        <label for="name">City</label>
+        <input type="text" class="form-control" id="City" name="City" required readonly
+        [(ngModel)]="book.City" >
+        
+        
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-3"><div [hidden]="h1"><button type="button" class="close" aria-label="Close" (click)="hide1()" (click)="emptyimg1()" (click)="imgrequired1()"><span aria-hidden="true">&times;</span></button></div><div [hidden]="!h1"><input type="file" name="img1"  class="form-control" (change)="imgrequired1()" (change)="fileChange1(input1)" (change)="hide1()" #input1 /></div><div [hidden]="required"><div class="alert alert-danger"> File to be uploaded is required </div></div><div [hidden]="h1"><img [attr.src]='img1' alt="" width="100%" height="30%"/> </div></div>
+            <div class="col-sm-3"><div [hidden]="h2"><button type="button" class="close" aria-label="Close" (click)="hide2()" (click)="emptyimg2()"><span aria-hidden="true">&times;</span></button></div><div [hidden]="!h2"><input type="file" name="img2" class="form-control"  (change)="fileChange2(input2)" (change)="hide2()" #input2 /></div><div [hidden]="h2"><img [attr.src]='img2' alt="" width="100%" height="30%"/></div></div>
+            <div class="col-sm-3"><div [hidden]="h3"><button type="button" class="close" aria-label="Close" (click)="hide3()" (click)="emptyimg3()"><span aria-hidden="true">&times;</span></button></div><div [hidden]="!h3"><input type="file" name="img3" class="form-control" (change)="fileChange3(input3)" (change)="hide3()" #input3 /> </div><div [hidden]="h3"><img [attr.src]='img3' alt="" width="100%" height="30%"/></div></div>
+            <div class="col-sm-3"><div [hidden]="h4"><button type="button" class="close" aria-label="Close" (click)="hide4()" (click)="emptyimg4()"><span aria-hidden="true">&times;</span></button></div><div [hidden]="!h4"><input type="file" name="img4" class="form-control" (change)="fileChange4(input4)" (change)="hide4()" #input4 /></div><div [hidden]="h4"><img [attr.src]='img4' alt="" width="100%" height="30%"/></div></div>
+          </div>
+        
+         
+         
+         
+          
+         </div>
+         
+         
+
+    <button type="button" class="btn btn-default" 
+    (click)="reset(); prodFrm.reset()">reset</button>
+    <button type="submit" class="btn btn-success"
+    (click)="img();"
+     [disabled]="!prodFrm.form.valid|| !required">Submit</button>
+
+      </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <!-- <div class="row">
+      <div class="col-xs-3">UserID: </div>
+      <div class="col-xs-9  pull-left">{{ book?.UserId }}</div>
+    </div> -->
+    <div class="row">
+      <div class="col-xs-3">Name: </div>
+      <div class="col-xs-9  pull-left">{{ book?.BookName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Points: </div>
+      <div class="col-xs-9 pull-left">{{ book?.Points }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Discription: </div>
+      <div class="col-xs-9 pull-left">{{ book?.Discription }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">SubCatogry: </div>
+      <div class="col-xs-9 pull-left">{{ book?.SubCatogry }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Governate: </div>
+      <div class="col-xs-9 pull-left">{{ book?.Governate }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">City: </div>
+      <div class="col-xs-9 pull-left">{{ book?.City }}</div>
+    </div> 
+      <div class="row">
+        <div class="col-xs-3">Img: </div>
+        
+         
+        </div>
+        <div class="row">
+          <div *ngIf = "book?.Img?.length>0">
+          <div class="col-sm-3"> <img [attr.src]='book?.Img[0]' alt="" width="100%" height="30%"/> </div>
+          <div class="col-sm-3"> <img [attr.src]='book?.Img[1]' alt="" width="100%" height="30%"/></div>
+          <div class="col-sm-3"> <img [attr.src]='book?.Img[2]' alt="" width="100%" height="30%"/> </div>
+          <div class="col-sm-3"> <img [attr.src]='book?.Img[3]' alt="" width="100%" height="30%"/></div>
+        </div>
+      </div>
+           <br>
+    <div [hidden]="saved">
+      <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+      <button class="btn btn-primary" (click)="insertprod()">save</button>
+  </div>
+  <div [hidden]="!saved">
+    <h1 style="text-align:center">Saved...</h1>
+    <button class="btn btn-primary"   (click)="newbook(); prodFrm.reset()">Add New Book</button>
+  </div>
+  </div>
+</div>

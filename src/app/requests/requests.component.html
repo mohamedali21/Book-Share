@@ -1,0 +1,114 @@
+<div [hidden]="Confirmed">
+  <div *ngFor="let b of userRequests">
+    <div class="blog-card">
+      <div class="photo photo1"  [ngStyle]="{ 'background-image': 'url(' + b.BookImgUrl + ') '}"></div>
+      <ul class="details">
+        <li class="date">{{b.ReqDate}}</li>
+        <li class="tags">
+          <ul>
+              <li><button type="button" class="btn btn-primary" (click)="Confirm(b)">Confirm</button></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="description">
+        <h1>{{b.BookName}}</h1>
+        <h5>offerd points:{{b.Offer_Points}}</h5>
+        <div style="height: 120px">
+        <div class="summary"><p class="reqName">{{b.RequesterName}} </p>
+          
+          <br> {{b.Message}}</div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div [hidden]="!Confirmed">
+  <div  [hidden]="boolFlag" >  
+    <div class="container">
+      <div style="width:100%;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);padding:20px">
+        <h3><strong>Book Name:</strong>{{UserReq?.BookName}} </h3>
+        <h3><strong>Requester Name:</strong>{{UserReq?.RequesterName}} </h3>
+        <div *ngIf="!OPConfirm">
+          <h3><strong>Message:</strong>{{UserReq?.Message}} </h3>
+          <h3><strong>Points:</strong>{{UserReq?.Offer_Points}} </h3>
+        </div>
+        <div [hidden]="OPConfirm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12" style="display:flex;justify-content: center;flex-wrap: wrap">
+                        <button type="submit" style="width:30%;margin-Top:20px;margin-left:10px" class="btn btn-primary" (click)="CofirmOP()"> <strong> Operation Is Done </strong> </button>          
+                        <button type="submit" style="width:30%;margin-Top:20px;margin-left:10px" class="btn btn-primary" (click)="CancelReq()"> <strong> cancel </strong> </button>                                              
+                      </div>
+                  </div>   
+            </div>
+        </div>
+        <div [hidden]="!OPConfirm">
+          <div [hidden]="!OpIsPending" style="text-align:center"><strong>wait for Buyer Confirmation......</strong></div>
+          <div [hidden]="OpIsPending" style="text-align:center"><strong>Operation Is Done You get {{UserReq?.Offer_Points}} Points</strong></div>
+        </div>
+      </div>
+      <div *ngIf="!OPConfirm" class="alert alert-warning">
+        <strong>Warning!</strong> If you want to send a Complaint Please send us at mm@book.com<br>
+      </div>
+    </div>
+  </div>  
+</div>
+<div [hidden]="!boolFlag">
+    <div style="height:calc(100vh - 80px); display: flex;justify-content: center;align-items: center">
+        <div  class="loader"></div>
+    </div>
+</div>
+
+<div [hidden]="!Confirmed">
+<div  [hidden]="boolFlag">
+<div  [hidden]="OPConfirm">
+  <div class="main-section" [ngClass]="{'open-more': isActive}">
+	<div class="row border-chat" style="background-color:#073a66">
+		<div class="col-md-12 col-sm-12 col-xs-12 first-section">
+			<div class="row">
+				<div (click)="isActive = !(isActive)" class="col-md-12 col-sm-12 col-xs-12 left-first-section">
+					<p>Chat</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row border-chat">
+		<div class="col-md-12 col-sm-12 col-xs-12 second-section">
+			<div class="chat-section" style="overflow: scroll; height: xyz;" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+				<ul>
+          <div *ngFor="let msg of msgs">
+					<li *ngIf="msg?.Type=='Sent'">
+						<div  class="left-chat">
+							<img src="https://webiconspng.com/wp-content/uploads/2016/12/User-Graphic-Icon.png">
+							<p>{{msg?.Message1}}
+							</p>
+							<!-- <span>{{msg?.Msg_Date}}</span> -->
+						</div>
+					</li>
+					<li *ngIf="msg?.Type=='Received'">
+						<div  class="right-chat">
+							<img src="https://webiconspng.com/wp-content/uploads/2016/12/User-Graphic-Icon.png">
+							<p>{{msg?.Message1}}
+							<!-- <span>{{msg?.Msg_Date}}</span> -->
+						</div>
+          </li>
+        </div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div  class="row border-chat">
+		<div class="col-md-12 col-sm-12 col-xs-12 third-section">
+			<div class="text-bar">
+				<input type="text" [(ngModel)]="chatmsg" placeholder="Write messege"><a (click)="sendmsg()"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+</div>
+</div>

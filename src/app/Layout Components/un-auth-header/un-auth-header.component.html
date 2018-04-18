@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+    <div class="container">
+      
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+          </button>
+        <a class="navbar-brand" href="#">BOOK SHARE</a>
+      </div >
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/ads" routerLinkActive="active">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a class="register" (click)="Register()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>          
+          <li><a class="login" (click)="login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+    </div>
+    </div>
+  </nav>
+  

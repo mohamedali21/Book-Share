@@ -1,0 +1,6 @@
+<app-auth-header *ngIf="userIsLogged()"></app-auth-header>
+<app-un-auth-header *ngIf="!userIsLogged()"></app-un-auth-header>
+<div id="h1"></div>
+<app-content></app-content>
+<div id="h2"></div>
+<app-footer></app-footer>

@@ -1,0 +1,49 @@
+
+.logout{
+    cursor: pointer;
+}
+a.disabled {
+    pointer-events: none;
+    cursor: not-allowed; 
+  }
+.navbar-inverse
+{
+    background-color: #6c9dc7;
+}
+ul {
+    background-color: #6c9dc7;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #6c9dc7;
+}
+
+.navbar-brand
+{
+    background-color:  #41698a;
+
+}
+
+
+.navbar-inverse {background-color:  #6c9dc7;}
+
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus { color: #41698a; }
+
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus{ color: #41698a; }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus
+    {background-color:#6c9dc7; }
+
+    .navbar-inverse .navbar-brand {  color:#ffffff; }

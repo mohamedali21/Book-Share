@@ -1,0 +1,125 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="sideNav">
+				<ul>
+					<li>
+						<button class="btn btn-primary btn-block" (click)="select('allUser')">Normal User</button>
+						<button class="btn btn-primary btn-block" (click)="select('adminUser')">Admins</button>
+						<button class="btn btn-primary btn-block" (click)="select('approvedBook')">approved Book</button>
+						<button class="btn btn-primary btn-block" (click)="select('pendingBook')">Pending Book</button>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<div class="col-sm-8">
+			<div class="Content">
+				<div [hidden]="!allUser" >
+					<table class="table table-hover table-condensed table-bordered table-striped table-responsive" >
+						<thead>
+							<tr>
+								<th>User Name</th>
+								<th>User Email</th>
+								<th>User Points</th>
+								<th>Activity</th>
+								<th>Suspend</th>
+								<th>Set as Admin</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let u of users">
+								<td>{{u?.UserName}}</td>
+								<td>{{u?.Email}}</td> 
+								<td>{{u?.Point}}</td>
+								<td>{{u?.IsActive}}</td>
+								<td><button (click)="suspend(u.Id)" class="btn btn-primary btn-block btn-responsive">Suspend</button></td>
+								<td><button (click)="setAdmin(u.Id)" class="btn btn-primary btn-block btn-responsive">Set as Admin</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div [hidden]="!adminUser" >
+					<table class="table table-hover table-condensed table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th>User Name</th>
+								<th>User Email</th>
+								<th>Remove from Admin</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let u of users">
+								<td>{{u?.UserName}}</td>
+								<td>{{u?.Email}}</td>
+								<td><button (click)="setUser(u.Id)" class="btn btn-primary btn-block">Set as Normal</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div [hidden]="!approvedBook" >
+					<table class="table table-hover table-condensed table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Points</th>
+								<th>Discription</th>
+								<th>Date_Uploaded</th>
+								<th>SubCatName</th>
+								<th>Pending Temperory</th>
+								<th>Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let b of books">
+								<td>{{b.Name}}</td>
+								<td>{{b.Points}}</td>
+								<td>{{b.Description}}</td>
+								<td>{{b.Date_Uploaded}}</td>
+								<td>{{b.SubCatName}}</td>
+								<td><button (click)="RemoveBook(b.BookID)" class="btn btn-primary btn-block">Set Pending</button></td>
+								<td><button class="btn btn-primary btn-block">Details</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div [hidden]="!pendingBook" >
+					<table class="table table-hover table-condensed table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Points</th>
+								<th>Discription</th>
+								<th>Date_Uploaded</th>
+								<th>SubCatName</th>
+								<th>Accept This</th>
+								<th>Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let b of books">
+								<td>{{b.Name}}</td>
+								<td>{{b.Points}}</td>
+								<td>{{b.Description}}</td>
+								<td>{{b.Date_Uploaded}}</td>
+								<td>{{b.SubCatName}}</td>
+								<td><button (click)="AcceptBook(b.BookID)" class="btn btn-primary btn-block">Approved</button></td>
+								<td><button (click)="bookDetails(b.BookID)" class="btn btn-primary btn-block">Details</button></td>
+							
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-sm-1">
+		</div>
+	</div>
+</div>
+ 

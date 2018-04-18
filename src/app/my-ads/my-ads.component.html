@@ -1,0 +1,25 @@
+<div *ngFor="let b of userAds">
+  <div class="blog-card">
+    <div class="photo photo1"  [ngStyle]="{ 'background-image': 'url(' + b.Img_Url + ') '}"></div>
+    <ul class="details">
+      <li class="date">{{b.Date_Uploaded}}</li>
+      <li class="tags">
+        <ul *ngIf="b.Requests != -1">
+          <li><button type="button" class="btn btn-primary" (click)="edit(b.BookID)">Edit</button></li>
+          <li><button type="button" class="btn btn-primary" (click)="delete(b.BookID)">Detele</button></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="description" (click)="showDetails(b.BookID)">
+      <h1>{{b.Name}}</h1>
+      <h5>Points: {{b.Points}}</h5>
+      <div style="height: 100px">
+        <p  class="summary">{{b.Description}}</p>
+      </div>
+      <a *ngIf="b.Requests > 0" class="req" (click)="requests(b.BookID)">Requests<span class="badge">{{b.Requests}}</span></a>
+      <a *ngIf="b.Requests == 0" [class.disabled]="true" class="req" (click)="requests(b.BookID)">Requests<span class="badge">{{b.Requests}}</span></a>    
+      <a *ngIf="b.Requests == -1" class="req" (click)="requests(b.BookID)">Check Status</a>
+      <a *ngIf="b.Requests == -2" [class.disabled]="true" class="req" (click)="requests(b.BookID)">Pending...</a>        
+    </div>
+  </div>
+</div>

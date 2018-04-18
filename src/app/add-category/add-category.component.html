@@ -1,0 +1,67 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="sideNav">
+				<ul>
+					<li>
+						<button class="btn btn-primary btn-block" (click)="select('addCategory')">New Category</button>
+						<button class="btn btn-primary btn-block" (click)="select('showCats')">Shwo Category</button>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<div class="col-sm-8">
+			<div class="Content">
+				<div [hidden]="!showCats" >
+					<h2 style="color:#337ab7;">Manage CAtegory</h2>
+					<table class="table table-hover table-condensed table-bordered table-striped" >
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Show Details</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor=" let c of cats">
+								<td>{{c.Name}}</td>
+								
+								<td><button (click)="showDetails(c.Id)" class="btn btn-primary btn-block">Details</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div [hidden]="!addCategory">
+					<h3 style="text-align: center;"><p>Add Category</p></h3>
+					<form #regFrm="ngForm" (ngSubmit)="AddCat(cat)">
+						<div class="form-group">
+							<label for="Name"><p>Name:</p></label>
+							<input type="Name" class="form-control" 
+							[(ngModel)]="cat.Name" id="Name" placeholder="Enter your name" name="Name" required #userName='ngModel'>
+						</div>
+				
+						<div [hidden]="userName.valid || userName.untouched"
+						class="alert alert-danger">
+							Name is required 
+						</div>
+						
+						<div *ngIf="isLogenError" class="alert alert-danger">
+							<i class="material-icons"></i>Email already exists
+						</div>
+						<button  class="btn btn-primary btn-block" 
+						[disabled]="!regFrm.form.valid">Add </button>
+					  </form>
+			 	</div>
+
+			</div>	
+
+		</div>
+
+		<div class="col-sm-1">
+		</div>
+	</div>
+
+</div>

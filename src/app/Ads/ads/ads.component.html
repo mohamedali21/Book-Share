@@ -1,0 +1,95 @@
+<div class="container">
+<div [hidden]="!IsLoaded">
+<div class="container search">
+            <div class="row">
+                    <div class="input-group" id="adv-search" style="margin-top:35px;width:44%;">
+                        <input type="text" class="form-control" placeholder="Search for books" [(ngModel)]="searchName" name="search" required/>
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <div class="dropdown dropdown-lg">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-right dropmenu" role="menu">
+                                        <form class="form-horizontal" role="form" >
+                                            <div class="form-group"   >
+                                                <label for="filter">Filter by</label>
+                                                <select  class="form-control" (change)="change($event.target.value)">
+                                                    <option  [value]="c.Id" *ngFor="let c of cats">
+                                                        {{c.Name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        
+                                          <div class="form-group"   >
+                                                <label for="filter">Filter by</label>
+                                                <select class="form-control" (change)="changeGovernate($event.target.value)">
+                                                <option  [value]="g.Id" *ngFor="let g of govs">
+                                                    {{g.Name}}
+                                                </option>
+                                                </select >
+                                            </div>
+                                          <div class="form-group">
+                                                <div  [hidden]="isGovEquallAllGovernate" >
+                                            <label for="filter">Filter by</label>
+                                            <select class="form-control" (change)="changeCity($event.target.value)">
+                                                <option [value]="city"  *ngFor="let city of governate?.Cities">
+                                                    {{city}}
+                                                </option>
+                                            </select>
+                                                </div>
+                                          </div>
+                                        </form>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="searchBook(searchName)"><span class="glyphicon glyphicon-search"  aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        <div class="container" style="margin-top: 30px;">
+            <div  style="margin-top: 30px;" *ngFor="let b of ads|paginate: { itemsPerPage: 8, currentPage: p }" class="col-sm-3">
+                <div class="col-item" (click)="details(b.BookID)">
+                    <div class="photo">
+                        <img [src]="b.Img_Url" class="img-responsive resize-img" alt="a" />
+                    </div>
+                    <div class="info">
+                        <div class="row">
+                            <div class="price col-md-6">
+                                <h5>
+                                Name: {{b.Name}}
+                                </h5>
+                                <h5 class="price-text-color">
+                                    Points:{{b.Points}}
+                                </h5>
+                                <h5 class="price-text-color">
+                                    Category : {{b.SubCatName}}
+                                </h5>
+                                <h5 class="price-text-color">
+                                    City Name : {{b.CityName}}
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="separator clear-left">
+                            
+                            <p class="btn-details">
+                                <i class="fa fa-list" ></i><a class="hidden-sm" (click)="details(b.BookID)">More details</a>
+                            </p>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 40px; display: flex;justify-content: center;align-items: center">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+        
+
+    <div [hidden]="IsLoaded">
+        <div style="height:calc(100vh - 80px); display: flex;justify-content: center;align-items: center">
+            <div  class="loader"></div>
+        </div>
+    </div>
+</div>

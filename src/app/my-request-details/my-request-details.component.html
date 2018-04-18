@@ -1,0 +1,119 @@
+<div  [hidden]="boolFlag" >  
+  <div class="container">
+    <div style="width:100%;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);padding:20px">
+      <h3><strong>Book Name:</strong>{{UserReq?.BookName}} </h3>
+      <h3><strong>Seller Name:</strong>{{UserReq?.SellerName}} </h3>
+      <div *ngIf="!OPConfirm">
+        <h3><strong>Message:</strong>{{UserReq?.Message}} </h3>
+        <h3><strong>Points:</strong>{{UserReq?.Offer_Points}} </h3>
+      </div>
+      <div [hidden]="Confirmed">
+          <div [hidden]="OPIsDoneByOther"style="text-align:center"><strong>Your Request not Confirmed Yet</strong></div>
+          <div [hidden]="!OPIsDoneByOther" style="text-align:center"><strong>Unfortunately! the Operation is done by oher user</strong></div>                               
+      </div>
+             
+      <div [hidden]="!Confirmed" >
+        <div [hidden]="OPConfirm">
+        <div style="text-align:center"><strong>Your Request Accepted</strong></div>        
+        <button type="submit" style="width:100%;margin-Top:20px" class="btn btn-primary" (click)="CofirmOP()"> <strong> Operation Is Done </strong> </button>
+      </div>
+      <div [hidden]="!OPConfirm">
+        <div style="text-align:center"><strong>Operation Is Done You ٍsent {{UserReq?.Offer_Points}} Points</strong></div>
+      </div>
+    </div>
+    </div>
+    <div *ngIf="!OPConfirm" [hidden]="!Confirm" class="alert alert-warning">
+      <strong>Note:</strong> If you want to send a Complaint Please mark the check box and send<br>
+      <strong>Note:</strong> If The Operation Is Done click on a button       
+    </div>
+
+    <div *ngIf="OPConfirm" style="width: 100%;margin-top: 50px" class="review">
+    <div  [hidden]="reviewFlag">
+      <form #form="ngForm" (ngSubmit)="reviewSubmit()">
+        <label >Review</label>
+        <div class="form-group">
+          <bar-rating  name="rating" [(ngModel)]="rate" [max]="5" required></bar-rating>
+          <textarea  class="form-control" style="margin-top: 5px" rows="4" name="review" 
+          id="review" [(ngModel)]="userReview" required #review='ngModel'></textarea>
+        </div>   
+        <div [hidden]="review.valid || review.untouched"
+        class="alert alert-danger">
+          Comment is required
+        </div>
+    
+        <button type="submit" class="btn btn-primary btn-block"
+        [disabled]="!form.valid">Review</button>
+      </form>
+      <div class="alert alert-warning">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <strong>Warning!</strong> Please left your comment and rate about the Seller     
+      </div>
+    </div>
+      <div style="width: 100%;margin-top: 50px" [hidden]="!reviewFlag">
+          <label >Review</label>
+          <div class="form-group">
+            <bar-rating [readOnly]="true" name="rating" [(rate)]="rate" [max]="5" required></bar-rating>
+            <textarea [readOnly]="true" class="form-control" style="margin-top: 5px" rows="4" name="review" 
+          id="review" [(ngModel)]="userReview" required #review='ngModel'></textarea>
+      </div>
+  </div>        
+</div>
+</div>
+
+<div [hidden]="boolFlag">
+  <div [hidden]="!Confirmed">
+    <div [hidden]="OPConfirm">
+    <div class="main-section" [ngClass]="{'open-more': isActive}">
+    <div class="row border-chat">
+      <div class="col-md-12 col-sm-12 col-xs-12 first-section">
+        <div class="row">
+          <div (click)="isActive = !(isActive)" class="col-md-12 col-sm-12 col-xs-12 left-first-section">
+            <p>Chat</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  class="row border-chat">
+      <div class="col-md-12 col-sm-12 col-xs-12 second-section">
+        <div class="chat-section">
+          <ul>
+            <div *ngFor="let msg of msgs">
+            <li *ngIf="msg?.Type=='Sent'">
+              <div  class="left-chat">
+                <img src="https://webiconspng.com/wp-content/uploads/2016/12/User-Graphic-Icon.png">
+                <p>{{msg?.Message1}}
+                </p>
+                <!-- <span>{{msg?.Msg_Date}}</span> -->
+              </div>
+            </li>
+            <li *ngIf="msg?.Type=='Received'">
+              <div  class="right-chat">
+                <img src="https://webiconspng.com/wp-content/uploads/2016/12/User-Graphic-Icon.png">
+                <p>{{msg?.Message1}}
+                <!-- <span>{{msg?.Msg_Date}}</span> -->
+              </div>
+            </li>
+          </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div  class="row border-chat" style="background-color: #fff">
+      <div class="col-md-12 col-sm-12 col-xs-12 third-section">
+        <div class="text-bar" >
+          <input type="text" [(ngModel)]="chatmsg" placeholder="Write messege"><a (click)="sendmsg()"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+</div>
+</div>
+</div>
+<div [hidden]="!boolFlag">
+    <div style="height:calc(100vh - 80px); display: flex;justify-content: center;align-items: center">
+        <div  class="loader"></div>
+    </div>
+</div>
+

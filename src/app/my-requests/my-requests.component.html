@@ -1,0 +1,21 @@
+<div *ngFor="let b of userRequests">
+    <div class="blog-card">
+      <div class="photo photo1"  [ngStyle]="{ 'background-image': 'url(' + b.BookImgUrl + ') '}"></div>
+      <ul class="details">
+        <li class="date">{{b.ReqDate}}</li>
+        <li class="tags">
+          <ul>
+              <li><button type="button" class="btn btn-primary" (click)="reqDetails(b.Book_Id)">Check Status</button></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="description">
+        <h1>{{b.BookName}}</h1>
+        <h5>offerd points:{{b.Offer_Points}}</h5>
+        <div style="height: 120px">
+          <div class="summary"><p class="reqName">{{b.SellerName}} </p>
+            <br> {{b.Message}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
